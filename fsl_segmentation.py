@@ -17,7 +17,7 @@ def process_subject(row):
     subject_folder = join(output_folder, abide, folder, sid)  # Crea el .anat en el pipeline (bash)
 
     # Create folders
-    os.makedirs(subject_folder, exist_ok=True)
+    os.makedirs(dirname(subject_folder), exist_ok=True)
 
     # Run pipeline
     pipeline = join(root, 'preprocessing_pipeline_b.sh')
