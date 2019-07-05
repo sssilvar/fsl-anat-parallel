@@ -22,26 +22,31 @@ fi
 # START PIPELINE
 # =============================================
 # Up to bias correction and BET
+echo "======== FSL ANAT (BIAS + BET) ========"
 eval "fsl_anat -i ${IMAGE} -o ${SUBJECT_FOLDER} --noseg --nosubcortseg"
 SUBJECT_FOLDER="${SUBJECT_FOLDER}.anat"
 STRIPPED_BRAIN="${SUBJECT_FOLDER}/T1_biascorr_brain.nii.gz"
 
 # Intensity normalization
+echo "======== INTENSITY NORMALIZATION ========"
 INM_BRAIN="${SUBJECT_FOLDER}/mprage_Correc.nii.gz"  # Intensity normalized volume
 eval "fslmaths ${STRIPPED_BRAIN} -inm 60 ${INM_BRAIN}"
 
 # Rigid egistration
+echo "======== RIGID REGISTRATION ========"
 REGISTERED="${SUBJECT_FOLDER}/Cer_Registrado.nii.gz"
 TRANSF_MAT="${SUBJECT_FOLDER}/Cer_Registrado.mat"
 eval "flirt -in ${MNI_TEMPLATE} -ref ${INM_BRAIN} -out ${REGISTERED} -omat ${TRANSF_MAT} -dof 12"
 
 # Elastic registration
+echo "======== ELASTIC REGISTRATION ========"
 REGISTERED="${SUBJECT_FOLDER}/Cer_Registrado_Elastico.nii.gz"
 TRANSF_MAT="${SUBJECT_FOLDER}/Cer_Registrado_Elastico.mat"
 WARP_COUT="${SUBJECT_FOLDER}/Elastic_Cout.nii.gz"
 eval "fnirt --ref=${INM_BRAIN} --in=${MNI_TEMPLATE} --iout=${REGISTERED} --aff=${TRANSF_MAT} --cout=${WARP_COUT} --splineorder=2 --imprefm=0 --impinm=0"
 
 # Segmentation
+echo "======== SEGMENTATION (HARVARD OXFORD) ========"
 CORTICAL_ATLAS="/usr/local/fsl/data/atlases/HarvardOxford/HarvardOxford-cort-maxprob-thr25-1mm.nii.gz"
 SUBCORTICAL_ATLAS="/usr/local/fsl/data/atlases/HarvardOxford/HarvardOxford-sub-maxprob-thr25-1mm.nii.gz"
 
