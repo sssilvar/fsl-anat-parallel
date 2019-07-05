@@ -23,6 +23,7 @@ def process_subject(row):
     pipeline = join(root, 'preprocessing_pipeline_b.sh')
     command = f'{pipeline} {in_file} {subject_folder}'
     print(command)
+    os.system('export FSLDIR="/usr/local/fsl"')
     os.system(command)
 
 
