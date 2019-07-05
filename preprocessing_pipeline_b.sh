@@ -57,3 +57,5 @@ eval "applywarp --ref=${INM_BRAIN} --in=${SUBCORTICAL_ATLAS} --warp=${WARP_COUT}
 
 # Done!
 echo "Done!"
+TIME=$(date)
+echo "End time: ${TIME}"
