@@ -32,7 +32,7 @@ if __name__ == '__main__':
     dataset_folder = '/home/nicolasmg/Paper2018/ABIDE_II_Muestra/'  # Hombres_Autistas / Hombres_Controles
     output_folder = '/home/nicolasmg/SVMTest/processed_pipeline_b'
     database_csv = join(root, 'database', 'database.csv')
-    n_cores = 4
+    n_cores = 24
 
     # assert isdir(dataset_folder), f'Folder {dataset_folder} does not exist!'
     assert isfile(database_csv), f'Database file {database_csv} does not exist.'
