@@ -36,7 +36,7 @@ eval "fslmaths ${STRIPPED_BRAIN} -inm 60 ${INM_BRAIN}"
 echo "======== RIGID REGISTRATION ========"
 REGISTERED="${SUBJECT_FOLDER}/Cer_Registrado.nii.gz"
 TRANSF_MAT="${SUBJECT_FOLDER}/Cer_Registrado.mat"
-eval "flirt -in ${MNI_TEMPLATE} -ref ${INM_BRAIN} -out ${REGISTERED} -omat ${TRANSF_MAT} -dof 12"
+#eval "flirt -in ${MNI_TEMPLATE} -ref ${INM_BRAIN} -out ${REGISTERED} -omat ${TRANSF_MAT} -dof 12"
 
 # Elastic registration
 echo "======== ELASTIC REGISTRATION ========"
