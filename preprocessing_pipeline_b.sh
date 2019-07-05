@@ -43,7 +43,9 @@ echo "======== ELASTIC REGISTRATION ========"
 REGISTERED="${SUBJECT_FOLDER}/Cer_Registrado_Elastico.nii.gz"
 TRANSF_MAT="${SUBJECT_FOLDER}/Cer_Registrado_Elastico.mat"
 WARP_COUT="${SUBJECT_FOLDER}/Elastic_Cout.nii.gz"
-eval "fnirt --ref=${INM_BRAIN} --in=${MNI_TEMPLATE} --iout=${REGISTERED} --aff=test.mat --cout=${WARP_COUT} --splineorder=2 --imprefm=0 --impinm=0"
+CMD="fnirt --ref=${INM_BRAIN} --in=${MNI_TEMPLATE} --iout=${REGISTERED} --aff=test.mat --cout=${WARP_COUT} --splineorder=2 --imprefm=0 --impinm=0"
+echo ${CMD}
+eval ${CMD}
 
 # Segmentation
 echo "======== SEGMENTATION (HARVARD OXFORD) ========"
