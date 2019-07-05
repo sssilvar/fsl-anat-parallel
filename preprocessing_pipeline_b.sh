@@ -22,7 +22,7 @@ fi
 # START PIPELINE
 # =============================================
 # Up to bias correction and BET
-eval "fsl_anat -i ${IMAGE} -o ${SUBJECT_FOLDER} --clobber --noseg"
+eval "fsl_anat -i ${IMAGE} -o ${SUBJECT_FOLDER} --clobber --noseg --nosubcortseg"
 STRIPPED_BRAIN="${SUBJECT_FOLDER}.anat/T1_biascorr_brain.nii.gz"
 
 # Intensity normalization
