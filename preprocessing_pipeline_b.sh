@@ -30,19 +30,28 @@ STRIPPED_BRAIN="${SUBJECT_FOLDER}/T1_biascorr_brain.nii.gz"
 # Intensity normalization
 echo "======== INTENSITY NORMALIZATION ========"
 INM_BRAIN="${SUBJECT_FOLDER}/mprage_Correc.nii.gz"  # Intensity normalized volume
+
+echo "Start time: $(date)"
 eval "fslmaths ${STRIPPED_BRAIN} -inm 60 ${INM_BRAIN}"
+echo "End time: $(date)"
+
 
 # Rigid egistration
 echo "======== RIGID REGISTRATION ========"
 REGISTERED="${SUBJECT_FOLDER}/Cer_Registrado.nii.gz"
 TRANSF_MAT="${SUBJECT_FOLDER}/Cer_Registrado.mat"
-#eval "flirt -in ${MNI_TEMPLATE} -ref ${INM_BRAIN} -out ${REGISTERED} -omat ${TRANSF_MAT} -dof 12"
+
+echo "Start time: $(date)"
+eval "flirt -in ${MNI_TEMPLATE} -ref ${INM_BRAIN} -out ${REGISTERED} -omat ${TRANSF_MAT} -dof 12"
+echo "End time: $(date)"
+
 
 # Elastic registration
 echo "======== ELASTIC REGISTRATION ========"
 REGISTERED="${SUBJECT_FOLDER}/Cer_Registrado_Elastico.nii.gz"
 WARP_COUT="${SUBJECT_FOLDER}/Elastic_Cout.nii.gz"
 eval "fnirt --ref=${INM_BRAIN} --in=${MNI_TEMPLATE} --iout=${REGISTERED} --aff=${TRANSF_MAT} --cout=${WARP_COUT} --splineorder=2 --imprefm=0 --impinm=0"
+echo "End time: $(date)"
 
 # Segmentation
 echo "======== SEGMENTATION (HARVARD OXFORD) ========"
@@ -52,10 +61,11 @@ SUBCORTICAL_ATLAS="/usr/local/fsl/data/atlases/HarvardOxford/HarvardOxford-sub-m
 CORTICAL_PARCELLATION="${SUBJECT_FOLDER}/Elastic_Cortical.nii.gz"
 SUBCORTICAL_PARCELLATION="${SUBJECT_FOLDER}/Elastic_SubCortical.nii.gz"
 
+echo "Start time: $(date)"
 eval "applywarp --ref=${INM_BRAIN} --in=${CORTICAL_ATLAS} --warp=${WARP_COUT} --out=${CORTICAL_PARCELLATION} --interp=nn"
 eval "applywarp --ref=${INM_BRAIN} --in=${SUBCORTICAL_ATLAS} --warp=${WARP_COUT} --out=${SUBCORTICAL_PARCELLATION} --interp=nn"
+echo "End time: $(date)"
 
 # Done!
 echo "Done!"
-TIME=$(date)
-echo "End time: ${TIME}"
+echo "Process finished at: $(date)"
