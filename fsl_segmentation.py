@@ -44,4 +44,5 @@ if __name__ == '__main__':
     # Create a multiprocessing Pool
     pool = Pool(n_cores)
     pool.map(process_subject, database.iterrows())
+    pool.join()
     pool.close()
