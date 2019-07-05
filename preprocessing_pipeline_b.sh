@@ -41,7 +41,7 @@ eval "flirt -in ${MNI_TEMPLATE} -ref ${INM_BRAIN} -out ${REGISTERED} -omat ${TRA
 # Elastic registration
 echo "======== ELASTIC REGISTRATION ========"
 REGISTERED="${SUBJECT_FOLDER}/Cer_Registrado_Elastico.nii.gz"
-TRANSF_MAT="${SUBJECT_FOLDER}/Cer_Registrado_Elastico.mat"
+TRANSF_MAT="${SUBJECT_FOLDER}/Cer_Registrado_Elastico"
 WARP_COUT="${SUBJECT_FOLDER}/Elastic_Cout.nii.gz"
 eval "fnirt --ref=${INM_BRAIN} --in=${MNI_TEMPLATE} --iout=${REGISTERED} --aff=${TRANSF_MAT} --cout=${WARP_COUT} --splineorder=2 --imprefm=0 --impinm=0"
 
