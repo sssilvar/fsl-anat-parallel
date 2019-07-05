@@ -23,7 +23,8 @@ fi
 # =============================================
 # Up to bias correction and BET
 eval "fsl_anat -i ${IMAGE} -o ${SUBJECT_FOLDER} --clobber --noseg --nosubcortseg"
-STRIPPED_BRAIN="${SUBJECT_FOLDER}.anat/T1_biascorr_brain.nii.gz"
+SUBJECT_FOLDER="${SUBJECT_FOLDER}.anat"
+STRIPPED_BRAIN="${SUBJECT_FOLDER}/T1_biascorr_brain.nii.gz"
 
 # Intensity normalization
 INM_BRAIN="${SUBJECT_FOLDER}/mprage_Correc.nii.gz"  # Intensity normalized volume
