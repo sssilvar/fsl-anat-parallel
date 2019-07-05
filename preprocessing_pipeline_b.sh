@@ -23,7 +23,7 @@ fi
 # =============================================
 # Up to bias correction and BET
 echo "======== FSL ANAT (BIAS + BET) ========"
-eval "fsl_anat -i ${IMAGE} -o ${SUBJECT_FOLDER} --noseg --nosubcortseg"
+eval "fsl_anat -i ${IMAGE} -o ${SUBJECT_FOLDER} --noseg --nosubcortseg --clobber"
 SUBJECT_FOLDER="${SUBJECT_FOLDER}.anat"
 STRIPPED_BRAIN="${SUBJECT_FOLDER}/T1_biascorr_brain.nii.gz"
 
